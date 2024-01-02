@@ -1,0 +1,373 @@
+body{
+    background-color: #291E41;
+}
+
+*{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.card{
+    border-radius: 24px;
+    border: 1px solid #3B1FAC;
+    background: linear-gradient(180deg, rgba(109, 137, 200, 0.25) 0%, rgba(54, 34, 133, 0.25) 100%);
+    background-blend-mode: plus-lighter;
+    box-shadow: 3px 4px 7px 0px rgba(255, 255, 255, 0.25);
+}
+
+.money{
+    color: #F7DF3D;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+ 
+.titre{
+    color: #F7DF3D;
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.btns1{
+    border-radius: 30px;
+    background: #48FF5A;
+    width: 169px;
+    height: 46px;
+    flex-shrink: 0;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.btns23{
+    border-radius: 30px;
+    background: #626668;
+    width: 169px;
+    height: 46px;
+    flex-shrink: 0;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.btns{
+    border-radius: 30px;
+    background: #48B9FF;
+    width: 169px;
+    height: 46px;
+    flex-shrink: 0;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    /* line-height: normal; */
+}
+
+.btns2{
+    width: 90vw;
+height: 45px;
+flex-shrink: 0;
+    border-radius: 23px;
+    border: 1px solid #58D2F4;
+    background: #58D2F4;
+    box-shadow: 2px 2px 10px 0px #58D2F4;
+}
+
+.btnsReg{
+    border-radius: 10px;
+border: 1px solid rgba(0, 0, 0, 0.50);
+background: #48B9FF;
+width: 90vw;
+height: 61.967px;
+flex-shrink: 0;
+
+color: #FFF;
+font-family: Inter;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.pags2{
+    color: #FFF;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.paragras{
+    color: #48B9FF;
+font-family: Inter;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.pags1{
+    color: #FFF;
+font-family: Inter;
+font-size: 19px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+.pag{
+    color: #FFF;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.pagor{
+    color: #F7DF3D;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.pags{
+    color: #FFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.carddim{
+    width: 95vw;
+    border-color: #48B9FF ;
+}
+
+.bluecol{
+    background: #4E89DA;
+}
+.menutext{
+    color: #FFF;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.img{
+    width: 95vw;
+    border-color: #48B9FF ;
+    /* width: 90vw;
+    height: 120px;
+    flex-shrink: 0; */
+    /* border-radius: 24px; */
+    background-image: url(./assets/retrait.png);
+    background: lightgray 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.paragra{
+    color: #FFF;
+    font-family: Inika, Hahmlet;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+@media screen and (max-width: 992px) {
+    .entete{
+        /* display: flex; */
+        /* justify-content: center; */
+        /* align-items: center; */
+        text-align: center;
+        width: 90vw;
+    }
+    .entete1{
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.bare1{
+    border: 0;
+}
+
+.bare2{
+    border: 0;
+}
+
+.large-100{
+    width: 100vw;
+}
+
+.large-95{
+    width: 95vw;
+}
+
+.large-90{
+    width: 90vw;
+}
+
+.large-85{
+    width: 85vw;
+}
+
+.large-80{
+    width: 80vw;
+}
+
+.large-70{
+    width: 70vw;
+}
+
+.large-60{
+    width: 60vw;
+}
+
+.large-50{
+    width: 50vw;
+}
+
+.copie1s{
+    background-color: rgb(104, 107, 106);
+}
+
+@media screen and (min-width: 992px) {
+    .bare1{
+        border: 1px solid white;
+        border-top:0;
+        border-right: 0;
+        border-left: 0;
+
+    }
+
+    .bare2{
+        border: 1px solid white;
+        border-top: 0;
+        border-left: 0;
+    }
+}
+
+.icos{
+    text-align: center;
+    /* width: 60px; */
+}
+.backs{
+    background-color: #291E41;
+}
+.contain1{
+    
+    position: fixed;
+}
+
+.inputtext::placeholder{
+    color: #48B9FF;
+    text-size-adjust: 20px;
+    color: #9CEBFC;
+    font-family: Inter;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.formaction{
+    width: 90vw;
+    border-radius: 30px;
+}
+
+.inputtext{
+    text-align: center;
+    height: 60px;
+    background-color: #291E41;
+    color: #48B9FF;
+    color: #48B9FF;
+    text-size-adjust: 20px;
+    color: #9CEBFC;
+    font-family: Inter;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border-radius: 30px;
+    fill: #291E41;
+    border: 1px solid #48B9FF;
+}
+
+
+
+.inputtext1{
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.50);
+    background: #FFF;
+    width: 90vw;
+    height: 61.967px;
+    flex-shrink: 0;
+    font-family: Inter;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+text-align: center;
+}
+
+.d-1{
+
+    height: 100px;
+}
+
+.inputtext1::placeholder{
+    color: #9F9F9F;
+font-family: Inter;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.texte1{
+    color: #48B9FF;
+    text-size-adjust: 20px;
+    color: #9CEBFC;
+    font-family: Inter;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.inputtext:focus{
+    background-color: #291E41;
+    color: #48B9FF;
+    text-size-adjust: 20px;
+    color: #9CEBFC;
+    font-family: Inter;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+
+

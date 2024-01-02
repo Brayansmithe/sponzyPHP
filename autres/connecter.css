@@ -1,0 +1,36 @@
+body {
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+}
+form {
+    margin-top: 130px;
+    padding: 50px 20px 50px 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px black;
+    box-shadow: inset 5px 5px 5px 5px white;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* .w {
+    margin-left: 30px;
+} */
+
+input[type="submit"] {
+    color: whitesmoke;
+    font-weight: bolder;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: blue;
+    margin-left: 170px;
+}
+input[type="text"] {
+    width: 30vw;
+    height: 30px;
+}
+input[type="password"] {
+    width: 30vw;    
+    height: 30px;
+}
