@@ -79,12 +79,15 @@ if (isset($_GET["p"])) {
 
           <?= $champ; ?>
 
+          <?php /* endif if (cond): */
+          elseif (!isset($champ)): ?>
+            <div class="d-flex">
+              <input class="inputtext1"  type="number" name="code_parainage" id="" placeholder="Code de parainage" value="0"><br><br>
+            </div>
           <?php endif; ?>
 
           
-          <!-- <div class="d-flex">
-            <input class="inputtext1"  type="number" name="code_parainage" id="" placeholder="Code de parainage" ><br><br>
-          </div> -->
+          
             <input class="btnsReg" type="submit" value="S'enregistrer" name="inscrire" class=""><br><br>
 
           <div class="footer"><p class="w">Vous avez déjà un compte ? <a href="login.php">Connexion</a></p></div>
