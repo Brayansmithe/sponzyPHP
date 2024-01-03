@@ -1,6 +1,23 @@
+<?php
+  include("connexion.php");
+  if (isset($_SESSION["id"])) {
+    $id = $_SESSION["id"];
+    $cles = $_SESSION["cle"];
+
+    $req = $con->query("SELECT * FROM utilisateurs WHERE id = '".$id."'");
+    $result = $req->fetchAll();
+
+    foreach($result as $results){
+      var_dump($results);
+      $num_tel = $results["num_tel"];
+      $cle = $results["code_user"];
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -15,12 +32,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
-    <title>@yield('titrePage')</title>
+    <title>Parainage</title>
 </head>
 <body class="mt-5 mb-5">
 <?php
 include('footer.php');
-include("connexion.php");
 ?>
 
 
@@ -58,7 +74,7 @@ include("connexion.php");
               </div>
               <div class="copie1 copie1s d-flex mt-5 border large-80 pe-4 ps-4 justify-content-between align-items-center rounded ps-3">
                 <div class="code">
-                    <h5 class=" text-white text-center">code: 34rv654</h5>
+                    <h5 class=" text-white text-center">code:gfreg</h5>
                 </div>
                 <div class="copie ">
                     <button type="button" class="btn btn-outline-primary">copier</button>
@@ -68,7 +84,7 @@ include("connexion.php");
 
               <div class="copie1 copie1s d-flex mt-5 border large-80 pe-4 ps-4 justify-content-between align-items-center rounded ps-3">
                 <div class="code">
-                    <h6 class="text-white ">lien: httpjjoinjbljb</h6>
+                    <h6 class="text-white ">lien: <a href="http://localhost/SponzyProjet/register.php?p=<?php if (isset($cle)) {  echo $cle; }; ?>"> http://localhost/SponzyProjet/register.php?p=<?php if (isset($cle)) {  echo $cle; }; ?></a></h6>
                 </div>
                 <div class="copie ">
                     <button type="button" class="btn btn-outline-primary">copier</button>

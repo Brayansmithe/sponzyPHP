@@ -1,10 +1,27 @@
+<?php
+include("connexion.php");
+include('Test.php');
+
+if (isset($_GET["p"])) {
+  $cle = $_GET["p"];
+
+  $req = $con->query("SELECT * FROM utilisateurs WHERE code_parainage = '".$cle."'"); 
+  $result = $req->fetchAll();
+  foreach ($result as $results) {
+    $code_parain = $results["code_parainage"];
+  }
+
+  $champ = "<div class='form-group'><input type='number' class='inputtext1 form-control' name='name' value='".$code_parain."' readonly></div>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+     
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/register.css">
@@ -15,14 +32,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
-    <title>@yield('titrePage')</title>
+    <title>Register</title>
 </head>
 <body class="mt-5 mb-5">
 
-<?php
-include("connexion.php");
-include('Test.php')
-?>
+
 
 
 
@@ -40,23 +54,38 @@ include('Test.php')
     <div class="d-flex justify-content-center card-body">
 
       
-      <form action="Test.php" class="form-data formaction mb-5 mt-3 text-center" method="POST">
+      <form action="" class="form-data formaction mb-5 mt-3 text-center" method="post">
+          
        
           <h2 class="w">Créer un compte</h2><br>
           <p class="t">Pour vous enregistrer, veuillez rempir le formulaire suivant</p><br><br>
+          <?php 
+            if (isset($flash)) {
+              echo $flash;
+              unset($flash);
+            }
+          ?>
           <div class="d-flex">
-            <input class="inputtext1" type="number" name="num_tel" id="in1" placeholder="Numero de telephone" required><br><br>
+            <input class="inputtext1"  type="number" name="num_tel" id="in1" placeholder="Numero de telephone" ><br><br>
           </div>    
-          <div class="d-flex d-1 justifu-content-center align-items-center">
-
-               
-                  <input class="inputtext1" type="" name="mots_passe" id="" placeholder="Mot de passe" required><br><br>
-     
-              </div>
           <div class="d-flex">
-            <input class="inputtext1" type="number" name="code_parainage" id="" placeholder="Code de parainage" required><br><br>
+            <input class="inputtext1"  type="password" name="mots_passe" id="" placeholder="Mot de passe" ><br><br>
           </div>
-            <input class="btnsReg" type="submit" value="S'enregistrer" class=""><br><br>
+          <div class="d-flex">
+            <input class="inputtext1"  type="password" name="mots_passe_confirme" id="" placeholder="Mot de passe de confirmation" ><br><br>
+          </div>
+
+          <?php if (isset($champ)): ?>
+
+          <?= $champ; ?>
+
+          <?php endif; ?>
+
+          
+          <!-- <div class="d-flex">
+            <input class="inputtext1"  type="number" name="code_parainage" id="" placeholder="Code de parainage" ><br><br>
+          </div> -->
+            <input class="btnsReg" type="submit" value="S'enregistrer" name="inscrire" class=""><br><br>
 
           <div class="footer"><p class="w">Vous avez déjà un compte ? <a href="login.php">Connexion</a></p></div>
       </form>
