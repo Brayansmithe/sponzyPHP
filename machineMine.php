@@ -48,7 +48,67 @@ include("connexion.php");
     <section  class="mt-5 container d-flex justify-content-center mb-5">
         <div class="">
 
+        <?php
 
+            $requete = $con->prepare("SELECT * FROM machines");
+            $requete->execute();
+
+            /* $utilisateur = $requete->fetch(); */
+            
+            while ($row = $result->fetch_assoc()) {
+                
+            
+        ?>
+            <div class="card mb-5 border  carddim">
+
+                <div class="row g-0">
+
+                    <div class="col-4 d-flex align-items-center justify-content-center bare2">
+                        <img src="assets/ma.png" height="600" width="200" class="img-fluid rounded-start" alt="...">
+                    </div>
+
+                    <div class="col-8 bare1">
+                        
+                        <div class="card-body ">
+                            <h5 class="card-title text-center titre"><?= $row["nomMachine"]; ?></h5>
+
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text pag">Revenue: </p>
+                                <p class="card-text pagor"><?= $row["revenu_jour"]; ?> <span>F</span></p>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text pag">Revenu total: </p>
+                                <p class="card-text pagor"><?= $row["revenu_total"]; ?><span>F</span></p>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text pag">Limite d’achat: </p>
+                                <p class="card-text pags"> 1 </p>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text pag">Péreiode de validité: </p>
+                                <p class="card-text pags"><?= $row["nombre_jour_valide"]; ?> <span>Jours</span></p>   
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="card-body d-flex justify-content-between">
+                    <div class="text-center d-flex align-self-center money"><p name="prix"><?= $row["cout_machine"]; ?>  </p><span>F</span></div>
+                    <div class=" text-end "><a href="confirmemachine.php" class="btn btn-primary btns">Acheter</a></div>
+                </div>
+
+            </div>
+
+            <?php
+                }
+            ?>
+
+<!-- 
             <div class="card mb-5 border  carddim">
 
                 <div class="row g-0">
@@ -360,7 +420,7 @@ include("connexion.php");
 
                 </div>
             </div>
-
+ -->
         </div>
 
     </section>

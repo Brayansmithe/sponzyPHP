@@ -10,7 +10,7 @@ if (isset($_GET["p"])) {
   foreach ($result as $results) {
     $code_parain = $results["code_parainage"];
   }
-
+ 
   $champ = "<div class='form-group'><input type='number' class='inputtext1 form-control' name='name' value='".$code_parain."' readonly></div>";
 }
 ?>

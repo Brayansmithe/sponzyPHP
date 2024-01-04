@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mar. 02 jan. 2024 à 21:59
+-- Généré le : jeu. 04 jan. 2024 à 09:26
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -74,12 +74,24 @@ CREATE TABLE `failed_jobs` (
 CREATE TABLE `machines` (
   `id` int(10) UNSIGNED NOT NULL,
   `cout_machine` int(11) NOT NULL,
+  `nomMachine` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `revenu_jour` int(11) NOT NULL,
+  `revenu_total` int(11) NOT NULL,
   `nombre_jour_valide` int(11) NOT NULL,
   `quatiter_achetable` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `machines`
+--
+
+INSERT INTO `machines` (`id`, `cout_machine`, `nomMachine`, `image`, `revenu_jour`, `revenu_total`, `nombre_jour_valide`, `quatiter_achetable`, `created_at`, `updated_at`) VALUES
+(1, 7500, 'MTI ViP 1', '', 300, 30000, 100, 1, '2024-01-03 18:26:07', NULL),
+(2, 15000, 'MTI ViP 2', '', 650, 65000, 100, 1, '2024-01-03 18:27:09', NULL),
+(3, 28000, 'MTI ViP 3', '', 1200, 120000, 100, 1, '2024-01-03 18:28:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -98,15 +110,15 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(28, '2014_10_12_000000_create_users_table', 1),
-(29, '2014_10_12_100000_create_password_reset_tokens_table', 1),
-(30, '2019_08_19_000000_create_failed_jobs_table', 1),
-(31, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(32, '2023_12_27_114344_create_utilisateurs_table', 1),
-(33, '2023_12_27_120530_create_machines_table', 1),
-(34, '2023_12_27_121246_create_depots_table', 1),
-(35, '2023_12_27_121732_create_retraits_table', 1),
-(36, '2023_12_27_122521_create_acheters_table', 1);
+(91, '2014_10_12_000000_create_users_table', 1),
+(92, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(93, '2019_08_19_000000_create_failed_jobs_table', 1),
+(94, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(95, '2023_12_27_114344_create_utilisateurs_table', 1),
+(96, '2023_12_27_120530_create_machines_table', 1),
+(97, '2023_12_27_121246_create_depots_table', 1),
+(98, '2023_12_27_121732_create_retraits_table', 1),
+(99, '2023_12_27_122521_create_acheters_table', 1);
 
 -- --------------------------------------------------------
 
@@ -177,31 +189,19 @@ CREATE TABLE `users` (
 
 CREATE TABLE `utilisateurs` (
   `id` int(10) UNSIGNED NOT NULL,
-  `num_tel` varchar(255) DEFAULT NULL,
+  `num_tel` varchar(255) NOT NULL,
   `mots_passe` varchar(255) NOT NULL,
   `nom` varchar(255) DEFAULT NULL,
   `prenom` varchar(255) DEFAULT NULL,
   `num_retrait` varchar(255) DEFAULT NULL,
   `moyen_retrait` tinyint(1) DEFAULT NULL,
-  `code_parainage` int(11) NOT NULL,
-  `code_user` int(11) DEFAULT NULL,
+  `code_parainage` int(11) DEFAULT NULL,
+  `code_user` int(11) NOT NULL,
   `solde_user` int(11) NOT NULL DEFAULT 0,
   `type_use` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `utilisateurs`
---
-
-INSERT INTO `utilisateurs` (`id`, `num_tel`, `mots_passe`, `nom`, `prenom`, `num_retrait`, `moyen_retrait`, `code_parainage`, `code_user`, `solde_user`, `type_use`, `created_at`, `updated_at`) VALUES
-(8, '12345678', '$2y$10$OesR9NKtvae437AvBsjBZeqsgMhSbazqEeC9//l3SQFhBeYnLAVRy', NULL, NULL, NULL, NULL, 123456, NULL, 0, 1, '2023-12-27 14:25:54', '2023-12-27 14:25:54'),
-(9, '123123', '$2y$10$VSPDVCekgV/.GCgUnhs.4.SFfOJiy8TC330yDsnSg4OTkbvq0abCG', NULL, NULL, NULL, NULL, 1111111, NULL, 0, 1, '2023-12-27 14:54:12', '2023-12-27 14:54:12'),
-(10, '12341234', '$2y$10$/Dv1YIS6nk5W06HnyMR/oOIxqif8Eq6/SGRyLxqE/tCgBbFO67EUO', NULL, NULL, NULL, NULL, 12345, NULL, 0, 1, '2023-12-27 14:59:23', '2023-12-27 14:59:23'),
-(11, '123456789', '$2y$10$BhB0l1pe76lXdZDlJWhv9.93Uy3t0FtAKmQr10yeNXRVyzgYQa6d.', NULL, NULL, NULL, NULL, 123, NULL, 0, 1, '2023-12-29 18:47:34', '2023-12-29 18:47:34'),
-(15, '693381647', 'Glynno', NULL, NULL, NULL, NULL, 123455, NULL, 50000, 1, NULL, NULL),
-(16, '123456788', '$2y$10$coBu2zP76WA/QEFvTnUbQuIa1jm3KyjQT1FREq97vKl49RasnP30u', NULL, NULL, NULL, NULL, 1234, NULL, 0, 1, '2024-01-02 15:50:24', '2024-01-02 15:50:24');
 
 --
 -- Index pour les tables déchargées
@@ -298,13 +298,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT pour la table `machines`
 --
 ALTER TABLE `machines`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT pour la table `personal_access_tokens`
@@ -328,7 +328,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

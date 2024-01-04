@@ -1,5 +1,7 @@
 
         <?php 
+        /* error_reporting(E_ALL);
+        ini_set("display_errors", 1); */
 
             
                 include("connexion.php");
@@ -28,6 +30,7 @@
                         
                             if ($pass === $cpass) {
 
+                                
                                 $cle = rand(1000,10000);
                                 $date = date("Y-m-d H:i:s");
                                 $insert = "INSERT INTO `utilisateurs` (`id`,`num_tel`, `mots_passe`, `code_parainage`, `code_user`, `created_at`)

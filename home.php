@@ -9,7 +9,6 @@ include("connexion.php");
     $result = $req->fetchAll();
 
     foreach($result as $results){
-      var_dump($results);
       $num_tel = $results["num_tel"];
       $cle = $results["code_user"];
     }
