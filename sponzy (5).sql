@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 05 jan. 2024 à 17:42
+-- Généré le : ven. 05 jan. 2024 à 21:50
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -40,15 +40,9 @@ CREATE TABLE `acheters` (
 --
 
 INSERT INTO `acheters` (`id`, `id_user`, `id_machine`, `created_at`, `updated_at`) VALUES
-(29, 1, 1, '2024-01-05 12:24:50', '2024-01-05 12:24:50'),
-(30, 1, 2, '2024-01-05 12:28:10', '2024-01-05 12:28:10'),
-(31, 1, 3, '2024-01-05 12:30:28', '2024-01-05 12:30:28'),
-(32, 1, 3, '2024-01-05 12:31:21', '2024-01-05 12:31:21'),
-(33, 1, 3, '2024-01-05 12:32:25', '2024-01-05 12:32:25'),
-(34, 1, 4, '2024-01-05 12:38:14', '2024-01-05 12:38:14'),
-(35, 1, 5, '2024-01-05 12:42:04', '2024-01-05 12:42:04'),
-(36, 1, 6, '2024-01-05 12:45:48', '2024-01-05 12:45:48'),
-(37, 1, 6, '2024-01-05 14:41:31', '2024-01-05 14:41:31');
+(40, 1, 1, '2024-01-05 18:53:30', '2024-01-05 18:53:30'),
+(41, 1, 3, '2024-01-05 19:58:21', '2024-01-05 19:58:21'),
+(42, 1, 4, '2024-01-05 20:03:13', '2024-01-05 20:03:13');
 
 -- --------------------------------------------------------
 
@@ -243,7 +237,7 @@ CREATE TABLE `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`id`, `num_tel`, `mots_passe`, `nom`, `prenom`, `num_retrait`, `moyen_retrait`, `code_parainage`, `code_user`, `solde_user`, `type_use`, `created_at`, `updated_at`) VALUES
-(1, '693381647', '1234', 'John Doe', 'Kamga', '693381647', 'Orange', 0, 0, 3995000, 1, '2024-01-04 15:15:05', '2024-01-05 14:41:31'),
+(1, '693381647', '1234', 'John Doe', 'Kamga', '693381647', 'Orange', 0, 0, 12500, 1, '2024-01-04 15:15:05', '2024-01-05 20:03:13'),
 (2, '672608962', '12345', NULL, NULL, NULL, NULL, 0, 4337, 0, 1, '2024-01-04 16:45:35', NULL),
 (646607, '1234', '1234', NULL, NULL, NULL, NULL, 0, 94962, 0, 1, '2024-01-05 14:26:54', NULL),
 (728976, '237657282828', '123456', NULL, NULL, NULL, NULL, 0, 31027, 0, 1, '2024-01-05 06:33:14', NULL);
@@ -325,7 +319,7 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `acheters`
 --
 ALTER TABLE `acheters`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT pour la table `depots`

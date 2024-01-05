@@ -2,6 +2,30 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
+                    $solde_user -= $row["cout_machine"];/* 
+                    $qte= $row["quatiter_achetable"] - 1 ; */
+
+                    echo $row["quatiter_achetable"];
+                    echo $solde_user ;
+
+                    
+                    $date = date("Y-m-d H:i:s");
+                    $insert = "INSERT INTO `acheters` (`id`,`id_user`, `id_machine`,  `created_at`, `updated_at`)
+                    VALUES (NULL,'$id', '$idM', '$date', '$date')";
+                    $insert = $con->exec($insert);
+
+                    /* $requete = $con->prepare("UPDATE machines SET quatiter_achetable = :quatiter_achetable, updated_at = :updated_at WHERE id = :idM");
+                    $requete->bindParam(':quatiter_achetable', $qte);
+                    $requete->bindParam(':updated_at', $date);
+                    $requete->bindParam(':idM', $idM);
+                    $requete->execute(); */
+
+                    $requete = $con->prepare("UPDATE utilisateurs SET solde_user = :nouveau_solde, updated_at = :updated_at WHERE id = :id_utilisateur");
+                    $requete->bindParam(':nouveau_solde', $solde_user);
+                    $requete->bindParam(':updated_at', $date);
+                    $requete->bindParam(':id_utilisateur', $id);
+                    $requete->execute();
+
                     // Sélectionner les achats des utilisateurs avec les machines correspondantes
 
                     $requete = $con->prepare('SELECT * FROM `acheters` WHERE id_user = :id_user AND id_machine = :id_machine');

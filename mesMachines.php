@@ -20,7 +20,7 @@
 <body class="mt-5 mb-5">
 <?php
 include('footer.php');
-include("connexion.php");
+include("connexion.php"); 
 
 $requete = $con->prepare("SELECT * FROM utilisateurs WHERE solde_user = 50000");
 $requete->execute();

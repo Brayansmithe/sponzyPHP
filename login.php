@@ -1,3 +1,9 @@
+<?php
+
+include("connexion.php");
+ 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +25,6 @@
 <body class="mt-5 mb-5">
 
 <?php
-include("connexion.php");
 include("connecter.php");
 
 ?>

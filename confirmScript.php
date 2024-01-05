@@ -3,8 +3,7 @@
 
                 if ($solde_user>= $row["cout_machine"] ) {
 
-                    $solde_user -= $row["cout_machine"];/* 
-                    $qte= $row["quatiter_achetable"] - 1 ; */
+                    $solde_user -= $row["cout_machine"];
 
                     echo $row["quatiter_achetable"];
                     echo $solde_user ;
@@ -15,12 +14,6 @@
                     VALUES (NULL,'$id', '$idM', '$date', '$date')";
                     $insert = $con->exec($insert);
 
-                    /* $requete = $con->prepare("UPDATE machines SET quatiter_achetable = :quatiter_achetable, updated_at = :updated_at WHERE id = :idM");
-                    $requete->bindParam(':quatiter_achetable', $qte);
-                    $requete->bindParam(':updated_at', $date);
-                    $requete->bindParam(':idM', $idM);
-                    $requete->execute(); */
-
                     $requete = $con->prepare("UPDATE utilisateurs SET solde_user = :nouveau_solde, updated_at = :updated_at WHERE id = :id_utilisateur");
                     $requete->bindParam(':nouveau_solde', $solde_user);
                     $requete->bindParam(':updated_at', $date);
@@ -29,7 +22,7 @@
 
                     
 
-                    /* // Sélectionner les achats des utilisateurs avec les machines correspondantes
+                    // Sélectionner les achats des utilisateurs avec les machines correspondantes
 
                     $requete = $con->prepare('SELECT * FROM `acheters` WHERE id_user = :id_user AND id_machine = :id_machine');
                     $requete->bindParam(':id_user', $id);
@@ -37,8 +30,9 @@
                     $requete->execute();
                     $resultat = $requete->fetch(PDO::FETCH_ASSOC);
 
+                    header("Location: machineMine.php");
                     // Répéter l'opération pendant 100 jours
-                    for ($jour = 1; $jour <= 4; $jour++) {
+                    for ($jour = 1; $jour <= 5; $jour++) {
 
                             
                             $id_utilisateur = $resultat['id_user'];
@@ -60,15 +54,15 @@
 
 
                         // Attente d'une journée avant la prochaine mise à jour (86400 secondes = 24 heures)
-                        sleep(2); // Attendre 24 heures avant la prochaine mise à jour
+                        sleep(60); // Attendre 24 heures avant la prochaine mise à jour
                     }
 
-                    echo "Mises à jour terminées pendant 100 jours !"; */
+                    
 
-                    exec('php scriptIncrementation.php > /dev/null 2>&1 &');
+                    /* exec('php scriptIncrementation.php > /dev/null 2>&1 &'); */
 
-                    /* header("Location: machineMine.php"); */
-                    /* exit(); */
+                    
+                    exit();
 
                 }else {
                     $flash = '<div class="alert alert-danger text-center">Solde Insuffisant</div>';
