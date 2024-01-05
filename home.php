@@ -1,18 +1,7 @@
 
 <?php
-include("connexion.php");
-  if (isset($_SESSION["id"])) {
-    $id = $_SESSION["id"];
-    $cles = $_SESSION["cle"];
-
-    $req = $con->query("SELECT * FROM utilisateurs WHERE id = '".$id."'");
-    $result = $req->fetchAll();
-
-    foreach($result as $results){
-      $num_tel = $results["num_tel"];
-      $cle = $results["code_user"];
-    }
-  }
+  include("session_user.php");
+  
 ?>
 
 <!DOCTYPE html>
@@ -169,22 +158,6 @@ if(isset($_SESSION['num_tel'])) {
 
     </div>
     
-
-
-
-    
-
-
-
-
-
- 
-
-   
-   
-
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 

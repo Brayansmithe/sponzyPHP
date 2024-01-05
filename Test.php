@@ -30,16 +30,16 @@
                         
                             if ($pass === $cpass) {
 
-                                
-                                $cle = rand(1000,10000);
+                                $iduser = random_int(10000, 1000000);
+                                $cle = random_int(10000, 100000);
                                 $date = date("Y-m-d H:i:s");
                                 $insert = "INSERT INTO `utilisateurs` (`id`,`num_tel`, `mots_passe`, `code_parainage`, `code_user`, `created_at`)
-                                VALUES (NULL,'$num_tel', '$pass', '$cles', '$cle', '$date')";
+                                VALUES ('$iduser','$num_tel', '$pass', '$cles', '$cle', '$date')";
                                 $insert = $con->exec($insert);
     
                                 $flash = '<div class="alert alert-succes text-center">Vous etes inscrit!</div>';
                                 header("Location: login.php");
-                               /*  exit(); */
+                                exit();
 
                             }else {
                                 $flash = '<div class="alert alert-danger text-center">Les deux mots de passes ne correspondent pas !</div>';
@@ -71,10 +71,13 @@
                         
                         
                             if ($pass === $cpass) {
-                                $cle = rand(1000,10000);
+
+                                $iduser = random_int(10000, 1000000);
+                                $cle = random_int(10000, 100000);
+                                /* $cle = rand(1000,10000); */
                                 $date = date("Y-m-d H:i:s");
                                 $insert = "INSERT INTO `utilisateurs` (`id`,`num_tel`, `mots_passe`, `code_parainage`, `code_user`, `created_at`)
-                                VALUES (NULL,'$num_tel', '$pass', '$code_parainage', '$cle', '$date')";
+                                VALUES ('$iduser','$num_tel', '$pass', '$code_parainage', '$cle', '$date')";
                                 $insert = $con->exec($insert);
     
                                 $flash = '<div class="alert alert-succes text-center">Vous etes inscrit!</div>';

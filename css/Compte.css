@@ -61,6 +61,7 @@ i{
     border: 1px solid #FFF;
     background: #372863;
     box-shadow: 4px 0px 10px -3px rgba(255, 255, 255, 0.50);
+    margin-bottom: 40px;
 }
 .contener2 .row .texte span:nth-child(1){
     font-size: 25px;

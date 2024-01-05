@@ -1,3 +1,9 @@
+<?php
+
+  include("session_user.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,13 +21,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
-    <title>@yield('titrePage')</title>
+    <title>Mon Compte</title>
 </head>
 <body class="mt-5 mb-5">
 
-<?php
-include('footer.php');
-?>
+    <?php
+        include('footer.php');
+    ?>
     <section class="container mt-3 d-lg-flex justify-content-between align-items-center entete  ">
         <div class="entete1">
             <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewBox="0 0 65 65" fill="none">
@@ -52,7 +58,28 @@ include('footer.php');
                 <i class="fa-solid fa-user fa-2x"></i>
             </div>
             <div class="col-4">
-                <span>6666666666</span><br><span>ID:234567</span>
+                <span>
+                <?php
+
+                    if (isset($num_tel)) {
+                        echo $num_tel;
+                    }
+
+                
+                ?>
+                </span><br>
+                <span>ID:</span>
+                <span>
+                    
+                    <?php
+
+                        if (isset($id)) {
+                        echo $id;
+                        }
+
+
+                    ?>
+                </span>
             </div>
             <div class="col-3">
             </div>
@@ -98,23 +125,7 @@ include('footer.php');
                             
                         </a></li>
 
-                        <li><a class="dropdown-item" href="equipe.php">
-                            
-                            <div class="d-flex justify-content-center align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                    <g clip-path="url(#clip0_32_47)">
-                                      <path d="M10.5469 0H14.4531C15.1025 0 15.625 0.522461 15.625 1.17188V9.375H19.9072C20.7764 9.375 21.2109 10.4248 20.5957 11.04L13.1689 18.4717C12.8027 18.8379 12.2021 18.8379 11.8359 18.4717L4.39941 11.04C3.78418 10.4248 4.21875 9.375 5.08789 9.375H9.375V1.17188C9.375 0.522461 9.89746 0 10.5469 0ZM25 18.3594V23.8281C25 24.4775 24.4775 25 23.8281 25H1.17188C0.522461 25 0 24.4775 0 23.8281V18.3594C0 17.71 0.522461 17.1875 1.17188 17.1875H8.33496L10.7275 19.5801C11.709 20.5615 13.291 20.5615 14.2725 19.5801L16.665 17.1875H23.8281C24.4775 17.1875 25 17.71 25 18.3594ZM18.9453 22.6562C18.9453 22.1191 18.5059 21.6797 17.9688 21.6797C17.4316 21.6797 16.9922 22.1191 16.9922 22.6562C16.9922 23.1934 17.4316 23.6328 17.9688 23.6328C18.5059 23.6328 18.9453 23.1934 18.9453 22.6562ZM22.0703 22.6562C22.0703 22.1191 21.6309 21.6797 21.0938 21.6797C20.5566 21.6797 20.1172 22.1191 20.1172 22.6562C20.1172 23.1934 20.5566 23.6328 21.0938 23.6328C21.6309 23.6328 22.0703 23.1934 22.0703 22.6562Z" fill="black"/>
-                                    </g>
-                                    <defs>
-                                      <clipPath id="clip0_32_47">
-                                        <rect width="25" height="25" fill="white"/>
-                                      </clipPath>
-                                    </defs>
-                                </svg>
-                                <p class="menutext">Mon equipe</p>
-                            </div>
-                            
-                        </a></li>
+                        
 
                         <li><a class="dropdown-item" href="parainage.php">
 
@@ -134,8 +145,9 @@ include('footer.php');
                             
                         </a></li>
 
-                        <li><a class="dropdown-item" href="mesMachines.php">
 
+                        <li><form action="deconnexion.php" method="post"><button type="submit" name="deconnexion" class="bg-transparent border-0 dropdown-item">
+                            
                             <div class="d-flex justify-content-center align-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                                     <g clip-path="url(#clip0_32_47)">
@@ -147,53 +159,83 @@ include('footer.php');
                                       </clipPath>
                                     </defs>
                                 </svg>
-                                <p class="menutext">Mes Machines</p>
+                                <p class="menutext">Deconnexion</p>
                             </div>
                             
-                        </a></li>
+                        </button></form></li>
+
                     </ul>
+
                   </div>
+
             </div>
+
             <div class="row text-center pt-3 pb-3">
+
                 <div class="col-4">
+
                     <span>
-                        50000
-                        F
-                    </span><br>
+
+                    <?php
+
+                        if (isset($solde_user)) {
+                        echo $solde_user;
+                        }
+
+
+                    ?>
+
+                    </span><span>F</span><br>
+
                     <span>Solde</span>
+
                 </div>
+
                 <div class="col-4">
                 </div>
-                <div class="col-4">
+
+               <!--  <div class="col-4">
                     <span>0.00</span><br>
                     <span>Equipe</span>
-                </div>
+                </div> -->
             </div>
+
         </div>
+
     </div>
+
     <div class="container-fluid contener2 paragra">
+
         <div class="row pt-3 bordure">
+
             <div class="col-2 pt-4">
+
                 <i class="fa-solid fa-book fa-2x"></i>
             </div>
+
             <div class="col-7 text-center pb-3 texte">
-                <span>Mes retraits</span><br>   
+                <span>Mes retraits</span><br> 
                 <span>
                     ici vous verez la liste de 
                     tout vos retrait deja effectuer
                 </span>
             </div>
+
             <div class="col-3 ">
+
                 <div class="detail">
                     <span>Details</span>
                 </div>
+
             </div>
         </div>
 
         <div class="row pt-3 bordure">
+
             <div class="col-2 pt-3">
                 <i class="fa-solid fa-star fa-2x"></i>
             </div>
+
             <div class="col-7 text-center pb-3 texte">
                 <span>Les temoignages</span><br>   
                 <span>
@@ -202,17 +244,22 @@ include('footer.php');
                     utilisateurs
                 </span>
             </div>
+
             <div class="col-3 ">
+
                 <div class="detail">
                     <span>Details</span>
                 </div>
+
             </div>
         </div>
 
         <div class="row pt-3 bordure">
+
             <div class="col-2 pt-3">
                 <i class="fa-solid fa-users-gear fa-2x"></i>
             </div>
+
             <div class="col-7 text-center pb-3 texte">
                 <span>Service client</span><br>   
                 <span>
@@ -220,17 +267,23 @@ include('footer.php');
                     en cas de difilculter
                 </span>
             </div>
+
             <div class="col-3 ">
+
                 <div class="detail">
                     <span>Contact</span>
                 </div>
+
             </div>
+
         </div>
 
         <div class="row pt-3 bordure">
+
             <div class="col-2 pt-3">
                 <i class="fa-solid fa-star fa-2x"></i>
             </div>
+
             <div class="col-7 text-center pb-3 texte">
                 <span>Autres</span><br>   
                 <span>
@@ -239,13 +292,19 @@ include('footer.php');
                     utilisateurs
                 </span>
             </div>
+
             <div class="col-3 ">
+
                 <div class="detail">
                     <span>Details</span>
                 </div>
+
             </div>
+
         </div>
+
     </div>
+    
 </section>
 
 

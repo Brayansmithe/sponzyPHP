@@ -1,3 +1,24 @@
+        <?php
+
+            error_reporting(E_ALL);
+            ini_set("display_errors", 1);
+
+            include('session_user.php');
+
+        ?>
+        <?php
+
+            $idM=$_GET["p"];
+
+            $result = $con->query('SELECT * FROM `machines` WHERE id = "'.$idM.'"');
+
+            $row = $result->fetch();
+
+            include('confirmScript.php');
+
+        ?>
+
+        
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +36,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
-    <title>@yield('titrePage')</title>
+    <title>Confirmez votre Achat</title>
 </head>
 <body class="mt-5 mb-5">
 <?php
@@ -46,52 +67,62 @@ include('footer.php');
     <section  class="mt-5 container d-flex justify-content-center">
         <div class="">
 
+        <?php
+            if (isset($flash)) {
+                echo $flash;
+                unset($flash);
+              }
+        ?>
             <div class="card mb-5 border  carddim">
 
-                <div class="row g-0 ">
+                <div class="row g-0">
 
-                    <div class="border border-top-0 border-start-0 col-4 d-flex align-items-center justify-content-center">
-                        <img src="assets/ma.png" height="600" width="200" class="img-fluid rounded-start" alt="...">
+                    <div class="col-4 d-flex align-items-center justify-content-center bare2">
+                        <img src="assets/<?= $row["image"]; ?>" height="600" width="200" class="img-fluid rounded-start" alt="...">
                     </div>
 
-                    <div class="col-8 border border-top-0 border-end-0">
+                    <div class="col-8 bare1">
                         
-                        <div class="card-body">
-                        <h5 class="card-title text-center titre">MTI ViP 1 </h5>
+                        <div class="card-body ">
+                            <h5 class="card-title text-center titre"><span name="nomMachine"><?= $row["nomMachine"]; ?></span> </h5>
 
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenue: </p>
-                            <p class="card-text pagor"> 300 <span>F</span></p>
-                        </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text pag">Revenue: </p>
+                                <p class="card-text pagor"><span name="revenu_jour"><?= $row["revenu_jour"]; ?> </span> <span>F</span></p>
+                            </div>
 
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenu total: </p>
-                            <p class="card-text pagor"> 30 000 <span>F</span></p>
-                        </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text pag">Revenu total: </p>
+                                <p class="card-text pagor"><span name="revenu_total"><?= $row["revenu_total"]; ?></span> <span>F</span></p>
+                            </div>
 
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Limite d’achat: </p>
-                            <p class="card-text pags"> 1 </p>
-                        </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text pag">Limite d’achat: </p>
+                                <p class="card-text pags"> <?= $row["quatiter_achetable"] ?></p>
+                            </div>
 
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Péreiode de validité: </p>
-                            <p class="card-text pags"> 100 <span>Jours</span></p>
-                            
-                        </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text pag">Péreiode de validité: </p>
+                                <p class="card-text pags"><span name="nombre_jour_valide"><?= $row["nombre_jour_valide"]; ?> </span> <span>Jours</span></p>   
+                            </div>
+
                         </div>
                     </div>
                     
                 </div>
+
                 <div class="card-body d-flex justify-content-between">
-                    <div class="text-center d-flex align-self-center money"><p>7 500 </p><span>F</span></div>
-                    <form action="machine.php" method="post">
-                        <div class=" text-end "><input type="submit" class="btn btn-primary btns" value="Confirmer"></div>
-                    </form>
+                    <div class="text-center d-flex align-self-center money"><p name="prix"><span name=""><?= $row["cout_machine"]; ?> </span>  </p><span>F</span></div>
                     
+                    <form action="" method="post">
+                        <div class=" text-end "><input type="submit" class="btn btn-primary btns" name="confirm" value="Confirmer"></div>
+                    </form>
 
                 </div>
+
             </div>
+
+           
         </div>
     </section>
 

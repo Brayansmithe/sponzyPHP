@@ -23,6 +23,7 @@
                             $_SESSION["id"]=$utilisateur["id"];
                             $_SESSION["cle"]=$utilisateur["code_user"];
                             header("Location: home.php");
+                            exit();
                         } else {
                             // Utilisateur non trouvé, afficher un message d'erreur (ou effectuer d'autres actions)
                             $flash = '<div class="alert alert-danger text-center">Numero ou mot de passe incorrecte !</div>';

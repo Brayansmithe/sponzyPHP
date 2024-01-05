@@ -1,3 +1,13 @@
+<?php
+
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
+    include("session_user.php");
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,12 +25,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
-    <title>@yield('titrePage')</title>
+    <title>Machines minieres</title>
 </head>
 <body class="mt-5 mb-5">
 <?php
-include('footer.php');
-include("connexion.php");
+    include('footer.php');
 ?>
 
 
@@ -50,377 +59,92 @@ include("connexion.php");
 
         <?php
 
-            $requete = $con->prepare("SELECT * FROM machines");
-            $requete->execute();
+            /* $requete = 'SELECT * FROM machines'; */
 
-            /* $utilisateur = $requete->fetch(); */
             
-            while ($row = $result->fetch_assoc()) {
+
+            $result = $con->query(/* $requete */ 'SELECT * FROM `machines`' );
+
+            if ($result->rowCount()> 0) {
+
+                $count=1;
+
+                while ($row = $result->fetch()) {
                 
+                    $results = $con->prepare('SELECT * FROM `acheters` WHERE id_user = :id_user AND id_machine = :id_machine');
+                    $results->bindParam(':id_user', $id);
+                    $results->bindParam(':id_machine', $row["id"]);
+                    $results->execute();
+                    /* $requete->bindParam(':quatiter_achetable', $qte); */ 
+
+                    $rows = $results->fetch();   
             
         ?>
-            <div class="card mb-5 border  carddim">
+                    <div id="<?= $count ?>" class="card mb-5 border  carddim">
 
-                <div class="row g-0">
+                        <div class="row g-0">
 
-                    <div class="col-4 d-flex align-items-center justify-content-center bare2">
-                        <img src="assets/ma.png" height="600" width="200" class="img-fluid rounded-start" alt="...">
-                    </div>
-
-                    <div class="col-8 bare1">
-                        
-                        <div class="card-body ">
-                            <h5 class="card-title text-center titre"><?= $row["nomMachine"]; ?></h5>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text pag">Revenue: </p>
-                                <p class="card-text pagor"><?= $row["revenu_jour"]; ?> <span>F</span></p>
+                            <div class="col-4 d-flex align-items-center justify-content-center bare2">
+                                <img src="assets/<?= $row["image"]; ?>" height="600" width="200" class="img-fluid rounded-start" alt="...">
                             </div>
 
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text pag">Revenu total: </p>
-                                <p class="card-text pagor"><?= $row["revenu_total"]; ?><span>F</span></p>
-                            </div>
+                            <div class="col-8 bare1">
+                                
+                                <div class="card-body ">
+                                    <h5 class="card-title text-center titre"><?= $row["nomMachine"]; ?></h5>
 
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text pag">Limite d’achat: </p>
-                                <p class="card-text pags"> 1 </p>
-                            </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="card-text pag">Revenue: </p>
+                                        <p class="card-text pagor"><?= $row["revenu_jour"]; ?> <span>F</span></p>
+                                    </div>
 
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text pag">Péreiode de validité: </p>
-                                <p class="card-text pags"><?= $row["nombre_jour_valide"]; ?> <span>Jours</span></p>   
-                            </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="card-text pag">Revenu total: </p>
+                                        <p class="card-text pagor"><?= $row["revenu_total"]; ?><span>F</span></p>
+                                    </div>
 
+                                    <div class="d-flex justify-content-between">
+                                        <p class="card-text pag">Limite d’achat: </p>
+                                        <p class="card-text pags"><?= $row["quatiter_achetable"] ?></p>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between">
+                                        <p class="card-text pag">Péreiode de validité: </p>
+                                        <p class="card-text pags"><?= $row["nombre_jour_valide"]; ?> <span>Jours</span></p>   
+                                    </div>
+
+                                </div>
+                            </div>
+                            
                         </div>
+
+                        <div class="card-body d-flex justify-content-between">
+                            <div class="text-center d-flex align-self-center money"><p name="prix"><?= $row["cout_machine"]; ?>  </p><span>F</span></div>
+                            <?php
+                                if (!$rows) {
+                                
+                            ?>
+                                    <div class=" text-end "><a href="confirmemachine.php?p=<?= $row["id"]; ?>" class="btn btn-primary btns">Acheter</a></div>
+                            <?php
+                                }else{
+                                
+                            ?>
+                                    <div class=" text-end "><a href="#<?= $count ?>" class="btn btn-secondary btnsd">Acheter</a></div>
+                            <?php
+                                }
+                            ?>
+                        </div>
+
                     </div>
-                    
-                </div>
 
-                <div class="card-body d-flex justify-content-between">
-                    <div class="text-center d-flex align-self-center money"><p name="prix"><?= $row["cout_machine"]; ?>  </p><span>F</span></div>
-                    <div class=" text-end "><a href="confirmemachine.php" class="btn btn-primary btns">Acheter</a></div>
-                </div>
-
-            </div>
-
-            <?php
+        <?php
+                    $count+=1;
                 }
-            ?>
+            }else {
+                echo '<div class="alert alert-danger text-center">Aucun résultat trouvé</div>';
+            }    
+        ?>
 
-<!-- 
-            <div class="card mb-5 border  carddim">
-
-                <div class="row g-0">
-
-                    <div class="col-4 d-flex align-items-center justify-content-center bare2">
-                        <img src="assets/ma.png" height="600" width="200" class="img-fluid rounded-start" alt="...">
-                    </div>
-
-                    <div class="col-8 bare1">
-                        
-                        <div class="card-body ">
-                            <h5 class="card-title text-center titre">MTI ViP 1 </h5>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text pag">Revenue: </p>
-                                <p class="card-text pagor"> 300 <span>F</span></p>
-                            </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text pag">Revenu total: </p>
-                                <p class="card-text pagor"> 30 000 <span>F</span></p>
-                            </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text pag">Limite d’achat: </p>
-                                <p class="card-text pags"> 1 </p>
-                            </div>
-
-                            <div class="d-flex justify-content-between">
-                                <p class="card-text pag">Péreiode de validité: </p>
-                                <p class="card-text pags"> 100 <span>Jours</span></p>   
-                            </div>
-
-                        </div>
-                    </div>
-                    
-                </div>
-
-                <div class="card-body d-flex justify-content-between">
-                    <div class="text-center d-flex align-self-center money"><p name="prix">7500 </p><span>F</span></div>
-                    <div class=" text-end "><a href="confirmemachine.php" class="btn btn-primary btns">Acheter</a></div>
-                </div>
-                
-            </div>
-
-            
-            
-
-            <div class="card mb-5 border  carddim">
-
-                <div class="row g-0 ">
-
-                    <div class="bare2 col-4 d-flex align-items-center justify-content-center">
-                        <img src="assets/mti2.png" height="600" width="200" class="img-fluid rounded-start" alt="...">
-                    </div>
-
-                    <div class="col-8 bare1">
-                        
-                        <div class="card-body">
-                        <h5 class="card-title text-center titre">MTI ViP 2 </h5>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenue: </p>
-                            <p class="card-text pagor"> 650 <span>F</span></p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenu total: </p>
-                            <p class="card-text pagor"> 65 000 <span>F</span></p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Limite d’achat: </p>
-                            <p class="card-text pags"> 1 </p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Péreiode de validité: </p>
-                            <p class="card-text pags"> 100 <span>Jours</span></p>
-                            
-                        </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="card-body d-flex justify-content-between">
-                    <div class="text-center d-flex align-self-center money"><p>15 000 </p><span>F</span></div>
-                    <div class=" text-end "><a href="#" class="btn btn-primary btns">Acheter</a></div>
-
-                </div>
-            </div>
-
-            <div class="card mb-5 border  carddim">
-
-                <div class="row g-0 ">
-
-                    <div class="bare2 col-4 d-flex align-items-center justify-content-center">
-                        <img src="assets/mti33.png" height="600" width="200" class="img-fluid rounded-start" alt="...">
-                    </div>
-
-                    <div class="col-8 bare1">
-                        
-                        <div class="card-body">
-                        <h5 class="card-title text-center titre">MTI ViP 3 </h5>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenue: </p>
-                            <p class="card-text pagor"> 1 200 <span>F</span></p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenu total: </p>
-                            <p class="card-text pagor"> 120 000 <span>F</span></p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Limite d’achat: </p>
-                            <p class="card-text pags"> 1 </p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Péreiode de validité: </p>
-                            <p class="card-text pags"> 100 <span>Jours</span></p>
-                            
-                        </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="card-body d-flex justify-content-between">
-                    <div class="text-center d-flex align-self-center money"><p>28 000 </p><span>F</span></div>
-                    <div class=" text-end "><a href="#" class="btn btn-primary btns">Acheter</a></div>
-
-                </div>
-            </div>
-
-
-            <div class="card mb-5 border  carddim">
-
-                <div class="row g-0 ">
-
-                    <div class="bare2 col-4 d-flex align-items-center justify-content-center">
-                        <img src="assets/mti3.png" height="600" width="200" class="img-fluid rounded-start" alt="...">
-                    </div>
-
-                    <div class="col-8 bare1">
-                        
-                        <div class="card-body">
-                        <h5 class="card-title text-center titre">MTI ViP 4 </h5>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenue: </p>
-                            <p class="card-text pagor"> 2 500 <span>F</span></p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenu total: </p>
-                            <p class="card-text pagor"> 250 000 <span>F</span></p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Limite d’achat: </p>
-                            <p class="card-text pags"> 1 </p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Péreiode de validité: </p>
-                            <p class="card-text pags"> 100 <span>Jours</span></p>
-                            
-                        </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="card-body d-flex justify-content-between">
-                    <div class="text-center d-flex align-self-center money"><p>60 000 </p><span>F</span></div>
-                    <div class=" text-end "><a href="#" class="btn btn-primary btns">Acheter</a></div>
-
-                </div>
-            </div>
-
-            <div class="card mb-5 border  carddim">
-
-                <div class="row g-0 ">
-
-                    <div class="bare2 col-4 d-flex align-items-center justify-content-center">
-                        <img src="assets/mti4.png" height="600" width="200" class="img-fluid rounded-start" alt="...">
-                    </div>
-
-                    <div class="col-8 bare1">
-                        
-                        <div class="card-body">
-                        <h5 class="card-title text-center titre">MTI ViP 5 </h5>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenue: </p>
-                            <p class="card-text pagor"> 4 500 <span>F</span></p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenu total: </p>
-                            <p class="card-text pagor"> 450 000 <span>F</span></p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Limite d’achat: </p>
-                            <p class="card-text pags"> 1 </p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Péreiode de validité: </p>
-                            <p class="card-text pags"> 100 <span>Jours</span></p>
-                            
-                        </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="card-body d-flex justify-content-between">
-                    <div class="text-center d-flex align-self-center money"><p>110 000 </p><span>F</span></div>
-                    <div class=" text-end "><a href="#" class="btn btn-primary btns">Acheter</a></div>
-
-                </div>
-            </div>
-            <div class="card mb-5 border  carddim">
-
-                <div class="row g-0 ">
-
-                    <div class="bare2 col-4 d-flex align-items-center justify-content-center">
-                        <img src="assets/mti5.png" height="600" width="200" class="img-fluid rounded-start" alt="...">
-                    </div>
-
-                    <div class="col-8 bare1">
-                        
-                        <div class="card-body">
-                        <h5 class="card-title text-center titre">MTI ViP 6 </h5>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenue: </p>
-                            <p class="card-text pagor"> 14 000 <span>F</span></p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenu total: </p>
-                            <p class="card-text pagor"> 1 400 000 <span>F</span></p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Limite d’achat: </p>
-                            <p class="card-text pags"> 1 </p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Péreiode de validité: </p>
-                            <p class="card-text pags"> 100 <span>Jours</span></p>
-                            
-                        </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="card-body d-flex justify-content-between">
-                    <div class="text-center d-flex align-self-center money"><p>300 000 </p><span>F</span></div>
-                    <div class=" text-end "><a href="#" class="btn btn-primary btns">Acheter</a></div>
-
-                </div>
-            </div>
-            
-            <div class="card mb-5 border  carddim">
-
-                <div class="row g-0 ">
-
-                    <div class="bare2 col-4 d-flex align-items-center justify-content-center">
-                        <img src="assets/mti6.png" height="600" width="200" class="img-fluid rounded-start" alt="...">
-                    </div>
-
-                    <div class="col-8 bare1">
-                        
-                        <div class="card-body">
-                        <h5 class="card-title text-center titre">MTI ViP 7 </h5>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenue: </p>
-                            <p class="card-text pagor"> 25 000 <span>F</span></p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Revenu total: </p>
-                            <p class="card-text pagor"> 2 500 000 <span>F</span></p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Limite d’achat: </p>
-                            <p class="card-text pags"> 1 </p>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text pag">Péreiode de validité: </p>
-                            <p class="card-text pags"> 100 <span>Jours</span></p>
-                            
-                        </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="card-body d-flex justify-content-between">
-                    <div class="text-center d-flex align-self-center money"><p>550 0000 </p><span>F</span></div>
-                    <div class=" text-end "><a href="#" class="btn btn-primary btns">Acheter</a></div>
-
-                </div>
-            </div>
- -->
         </div>
 
     </section>
